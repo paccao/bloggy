@@ -4,7 +4,7 @@ import styles from '../styles/BlogCard.module.css'
 
 export const BlogPost = ({
 	title,
-	author_id,
+	author,
 	cover_photo,
 	date_published,
 	slug,

@@ -1,19 +1,30 @@
-export interface Post {
-	id?: number
+export interface PostResponse {
+	id: number
 	title: string
+	date_published: string
 	slug: string
+	content: {
+		html: string
+	}
 	cover_photo: {
 		url: string
 	}
-	content?: {
-		html: string
-	}
-	date_published: string
-	author_id: number
+	author: { name: string; avatar: {} }
 }
 
 export interface Author { }
 
 export interface Posts {
-	posts: Post[]
+	posts: PostResponse[]
+}
+
+export interface Post {
+	title: string
+	author: {
+		name: string
+		avatar: {}
+	}
+	cover_photo: { url: string }
+	date_published: string
+	slug: string
 }
