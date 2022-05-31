@@ -9,7 +9,11 @@ export interface PostResponse {
 	cover_photo: {
 		url: string
 	}
-	author: { name: string; avatar: {} }
+	author: {
+		name: string; avatar: {
+			url: string
+		}
+	}
 }
 
 export interface Author { }
