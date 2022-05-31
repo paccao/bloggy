@@ -22,7 +22,9 @@ export interface Post {
 	title: string
 	author: {
 		name: string
-		avatar: {}
+		avatar: {
+			url: string
+		}
 	}
 	cover_photo: { url: string }
 	date_published: string
