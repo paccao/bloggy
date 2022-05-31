@@ -10,7 +10,8 @@ export interface PostResponse {
 		url: string
 	}
 	author: {
-		name: string; avatar: {
+		name: string
+		avatar: {
 			url: string
 		}
 	}
@@ -39,6 +40,25 @@ export interface PostObj {
 	post: Post
 }
 
+export interface PostObjWithContent {
+	post: PostWithContent
+}
+
+export interface PostWithContent {
+	title: string
+	author: {
+		name: string
+		avatar: {
+			url: string
+		}
+	}
+	cover_photo: { url: string }
+	date_published: string
+	slug: string
+	content: {
+		html: string
+	}
+}
 export interface Slugs {
 	posts: SlugResponse[]
 }
