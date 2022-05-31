@@ -32,8 +32,6 @@ const QUERY = gql`
 
 export async function getStaticProps() {
 	const { posts }: Posts = await graphcms.request(QUERY)
-	console.log(posts)
-
 	// Always return something in the props with getStaticProps
 	return {
 		props: {
@@ -54,15 +52,7 @@ const Home: NextPage<Posts> = ({ posts }) => {
 
 			<main className={styles.main}>
 				{posts.map((post) => (
-					<BlogPost
-						key={post.id}
-						// title={post.title}
-						// author_id={post.author_id}
-						// cover_photo={post.cover_photo}
-						// date_published={post.date_published}
-						// slug={post.slug}
-						{...post}
-					/>
+					<BlogPost key={post.id} {...post} />
 				))}
 			</main>
 		</div>

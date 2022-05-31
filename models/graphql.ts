@@ -34,3 +34,15 @@ export interface Post {
 	date_published: string
 	slug: string
 }
+
+export interface PostObj {
+	post: Post
+}
+
+export interface Slugs {
+	posts: SlugResponse[]
+}
+
+export interface SlugResponse {
+	slug: string
+}
