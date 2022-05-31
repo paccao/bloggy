@@ -1,8 +1,49 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import { GraphQLClient, gql } from 'graphql-request'
+import { Posts } from '../models/graphql'
+import { BlogPost } from '../components/BlogCard'
 
-const Home: NextPage = () => {
+const graphcms = new GraphQLClient(process.env.CMS_API_URL as string)
+
+const QUERY = gql`
+	{
+		posts {
+			id
+			title
+			date_published
+			slug
+			content {
+				html
+			}
+			author {
+				name
+				avatar {
+					url
+				}
+			}
+			cover_photo {
+				url
+			}
+		}
+	}
+`
+
+export async function getStaticProps() {
+	const { posts }: Posts = await graphcms.request(QUERY)
+	console.log(posts)
+
+	// Always return something in the props with getStaticProps
+	return {
+		props: {
+			posts,
+		},
+		revalidate: 10,
+	}
+}
+
+const Home: NextPage<Posts> = ({ posts }) => {
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -15,9 +56,16 @@ const Home: NextPage = () => {
 			</Head>
 
 			<main className={styles.main}>
-				<h1 className={styles.title}>
-					Welcome to <a href="https://nextjs.org">Next.js!</a>
-				</h1>
+				{posts.map((post) => (
+					<BlogPost
+						key={post.id}
+						title={post.title}
+						author_id={post.author_id}
+						cover_photo={post.cover_photo}
+						date_published={post.date_published}
+						slug={post.slug}
+					/>
+				))}
 			</main>
 		</div>
 	)
